@@ -21,7 +21,7 @@ pipeline{
                 stage("Test on linux"){
                     steps{
                         script{
-                            build_search ${BUILD_NUMBER}
+                            build_search BUILD_NUMBER
                         }
                         
                         
