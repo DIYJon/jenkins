@@ -20,11 +20,10 @@ pipeline{
             parallel{
                 stage("Test on linux"){
                     steps{
-                        script{
-                            sh """
-                            contains= cat index.html | grep '${BUILD_NUMBER}'
-                            """
-                        }
+                        sh """
+                        cat index.html | grep '${BUILD_NUMBER}'
+                        """
+                        
                         
                     }
                 }
