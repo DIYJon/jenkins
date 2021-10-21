@@ -20,9 +20,10 @@ pipeline{
             parallel{
                 stage("Test on linux"){
                     steps{
-                        contains= cat index.html | grep '30'
-                        echo contains
-                        
+                        script{
+                            contains= cat index.html | grep '30'
+                            echo contains
+                        }
                         
                     }
                 }
