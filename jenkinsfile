@@ -20,9 +20,9 @@ pipeline{
             parallel{
                 stage("Test on linux"){
                     steps{
-                        sh """
-                        cat index.html | grep 'Something to see here! ${BUILD_NUMBER}'
-                        """
+                        script{
+                            build_search.sh ${BUILD_NUMBER}
+                        }
                         
                         
                     }
