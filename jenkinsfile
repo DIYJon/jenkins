@@ -21,8 +21,10 @@ pipeline{
                 stage("Test on linux"){
                     steps{
                         script{
+                            sh """
                             contains= cat index.html | grep '30'
                             echo contains
+                            """
                         }
                         
                     }
