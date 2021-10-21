@@ -20,7 +20,7 @@ pipeline{
             parallel{
                 stage("Test on linux"){
                     steps{
-                        cat'index.html'
+                        text.contains("${BUILD_NUMBER}")
                         
                         
                     }
