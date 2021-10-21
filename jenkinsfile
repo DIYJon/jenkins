@@ -1,21 +1,21 @@
-pipeline {
+pipeline{
     agent any
-    options{
-      timestamp()
-    }
-    
     stages{
-
-        stage('My first stage') {
-            steps {
-                echo "This is a step in ny first"
+        stage("Build"){
+            steps{
+                echo ""
             }
         }
-
-        stage('printenv') {
-            steps {
-                sh 'printenv'
+        stage("Test"){
+            steps{
+                echo ""
             }
-        }     
+        }
+        stage("Deploy"){
+            steps{
+                echo ""
+            }
+            
+        }
     }
 }
