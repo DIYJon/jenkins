@@ -21,7 +21,7 @@ pipeline{
                 stage("Test on linux"){
                     steps{
                             sh """
-                            bash ./build_search.sh BUILD_NUMBER
+                            bash ./build_search.sh `Something to see here! ${BUILD_NUMBER}` 
                             """
                         }
                         
