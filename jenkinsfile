@@ -20,7 +20,11 @@ pipeline{
             parallel{
                 stage("Test on linux"){
                     steps{
-                        echo "Linux"
+                        def text = readFile file: "index.html"
+                        if [[ $text == *${BUILD_NUMBER}* ]]; then
+                            echo "It's there!"
+                        fi
+                        
                     }
                 }
 
