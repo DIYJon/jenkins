@@ -1,4 +1,4 @@
-@library('Jenkins_Shared') _
+@library('jenkins_shared') _
 
 def printFromFunction () {
     println("I am printing from a function")
