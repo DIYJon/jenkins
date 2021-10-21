@@ -20,7 +20,7 @@ pipeline{
             parallel{
                 stage("Test on linux"){
                     steps{
-                        grep $BUILD_NUMBER 'index.html'
+                        cat'index.html'
                         
                         
                     }
