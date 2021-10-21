@@ -22,8 +22,7 @@ pipeline{
                     steps{
                         script{
                             sh """
-                            contains= cat index.html | grep '30'
-                            echo contains
+                            contains= cat index.html | grep '${BUILD_NUMBER}'
                             """
                         }
                         
