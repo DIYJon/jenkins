@@ -20,7 +20,8 @@ pipeline{
             parallel{
                 stage("Test on linux"){
                     steps{
-                        text.contains("${BUILD_NUMBER}")
+                        doesItContain = cat index.html | grep BUILD_NUMBER
+                        echo doesItContain
                         
                         
                     }
