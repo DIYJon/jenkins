@@ -1,21 +1,21 @@
 pipeline {
-  agent any
-  options{
+    agent any
+    options{
       timestamp()
-  }
-  stages {
-    stage('Create Folder') {
-      steps {
-        mkdir -p build
-        cp readme.md build/index.html
-      }
-    }  
+    }
     
-    stage('Zip') {
-      steps {
-        tar -zcvf build.tgz build
-      }
-    }    
+    stages{
 
-  }
+        stage('My first stage') {
+            steps {
+                echo "This is a step in ny first"
+            }
+        }
+
+        stage('printenv') {
+            steps {
+                sh 'printenv'
+            }
+        }     
+    }
 }
