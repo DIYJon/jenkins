@@ -20,13 +20,13 @@ pipeline{
             parallel{
                 stage("Test on linux"){
                     steps{
-                        script{
-                            ./build_search BUILD_NUMBER
+                            sh """
+                            ./build_search.sh BUILD_NUMBER
+                            """
                         }
                         
-                        
                     }
-                }
+                
 
                 stage("Test on windows"){
                     steps{
