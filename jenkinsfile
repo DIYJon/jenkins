@@ -6,12 +6,13 @@ pipeline{
         stage("Build"){
             steps{
                 echo "Build"
+                hello()
+                helloVariable('Jon')
                 script{
                     utils.printFromFunction()
                     utils.replaceString()
                 }
-                hello()
-                helloVariable('Jon')
+
             }
         }
         
