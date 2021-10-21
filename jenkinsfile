@@ -20,8 +20,8 @@ pipeline{
             parallel{
                 stage("Test on linux"){
                     steps{
-                        doesItContain=cat index.html | grep BUILD_NUMBER
-                        echo doesItContain
+                        contains= cat index.html | grep '30'
+                        echo contains
                         
                         
                     }
