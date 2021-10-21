@@ -1,9 +1,19 @@
 pipeline {
   agent any
+  options{
+      timestamp()
+  }
   stages {
-    stage('Build') {
+    stage('Create Folder') {
       steps {
-        echo 'This is a step in stage 1'
+        mkdir -p build
+        cp readme.md build/index.html
+      }
+    }  
+    
+    stage('Zip') {
+      steps {
+        tar -zcvf build.tgz build
       }
     }    
 
