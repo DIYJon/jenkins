@@ -93,8 +93,8 @@ pipeline{
         always{
             archiveArtifacts artifacts: 'build.tgz', followSymlinks: false
         }
-//        cleanup{
-//            cleanWs()
-//        }
+        cleanup{
+            cleanWs()
+        }
     }
 }
