@@ -36,7 +36,7 @@ pipeline{
             agent {
                 docker {
                     image "python:latest"
-                    args "-v ${WORKSPACE}/docker:/home/python"
+                    args "-v ${WORKSPACE}/docker:/home/node"
                 }
             }
             steps{
