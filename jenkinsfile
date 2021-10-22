@@ -1,8 +1,8 @@
 @Library('jenkins_shared') _
 
 
-
 pipeline{
+    agent any
 
     environment {
     MYENVVAR="testenvvar"
@@ -12,7 +12,7 @@ pipeline{
         string(name: 'Name', defaultValue: 'Jon', description: 'Your Name')
     }
     
-    agent any
+    
     stages{
         stage("Build"){
             steps{
@@ -29,6 +29,21 @@ pipeline{
             }
         }
         
+        stage("Docker Build"){
+            agent {
+                docker {
+                    image "node:latest"
+                    args "-v ${WORKSPACE}"/docker:/home/node
+                }
+            }
+            steps{
+                sh"""
+                node --version>/home/node/docker_node_version
+                npm --version>/home/node/docker_npmp_version
+                """
+            }
+        }
+
         stage('Test on OS'){
             parallel{
                 stage("Test on linux"){
@@ -64,6 +79,8 @@ pipeline{
             }            
         }
 
+        
+
         stage("SSH Copy"){
             steps{
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'SSH Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'tar -zxvf build.tgz && mv build/index.html /var/www/html/index.html', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'build.tgz')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
@@ -74,8 +91,8 @@ pipeline{
         always{
             archiveArtifacts artifacts: 'build.tgz', followSymlinks: false
         }
-        cleanup{
-            cleanWs()
-        }
+//        cleanup{
+//            cleanWs()
+//        }
     }
 }
