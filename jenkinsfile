@@ -35,11 +35,26 @@ pipeline{
                 }
             }
         }
-        stage("Deploy"){
+        stage("Package HTML"){
             steps{
-                build '3_Freestyle'
-            }
-            
+                sh """
+                    mkdir -p build
+                    cp index.html build/index.html          
+                    tar -zcvf build.tgz build
+                """
+            }            
+        }
+
+        stage("Package HTML"){
+            steps{
+                archiveArtifacts artifacts: 'build.tgz', followSymlinks: false
+            }            
+        }
+
+        stage("SSH Copy"){
+            steps{
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'SSH Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'tar -zxvf build.tgz && mv build/index.html /var/www/html/index.html', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'build.tgz')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+            }            
         }
     }
 }
