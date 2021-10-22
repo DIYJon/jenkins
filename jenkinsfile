@@ -4,6 +4,11 @@
 pipeline{
     agent any
 
+    options{
+        timestamps()
+        disableConcurrentBuilds()
+    }
+
     environment {
     MYENVVAR="testenvvar"
     }
