@@ -1,11 +1,21 @@
 @Library('jenkins_shared') _
 
+environment{
+    MYENVVAR = "testenvvar"
+}
+
+parameters{
+    string(name: 'Name', defaultValue: 'Jon', description: 'Your Name')
+}
+
 pipeline{
     agent any
     stages{
         stage("Build"){
             steps{
                 echo "Build"
+                echo "${MYENVVAR}"
+                echo "${params.Name}"
                 hello()
                 helloVariable('Jon')
                 script{
