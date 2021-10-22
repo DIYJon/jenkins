@@ -16,6 +16,9 @@ pipeline{
     stages{
         stage("Build"){
             steps{
+                sh """
+                mkdir -p docker
+                """
                 echo "Build"
                 echo "${MYENVVAR}"
                 echo "${params.Name}"
@@ -33,7 +36,7 @@ pipeline{
             agent {
                 docker {
                     image "node:latest"
-                    args "-v ${WORKSPACE}"/docker:/home/node
+                    args "-v ${WORKSPACE}/docker:/home/node"
                 }
             }
             steps{
